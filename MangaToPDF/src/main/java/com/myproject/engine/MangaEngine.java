@@ -36,6 +36,9 @@ public class MangaEngine {
             writer.open();
             document.open();
             scorriAlbero(f, document);
+            document.addAuthor("Francesco Lucci");
+            document.addTitle(namePDF);
+            document.addCreationDate();
             document.close();
             writer.close();
         } catch (Exception e) {
