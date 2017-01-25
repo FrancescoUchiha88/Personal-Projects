@@ -8,9 +8,13 @@ package com.myproject.engine;
 import com.itextpdf.text.Chapter;
 import java.io.FileOutputStream;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import java.awt.Color;
 import java.io.File;
 import javax.imageio.ImageIO;
 
@@ -52,8 +56,12 @@ public class MangaEngine {
                     if (ImageIO.read(lista[i]) != null) {
                         if (isFirst) {
                             cap=cap+1;
-                            Chapter chapter = new Chapter(" - " + lista[i].getPath().split("\\\\")[lista[i].getPath().split("\\\\").length - 2], 1);
+                            
+                            Paragraph title = new Paragraph("This is Chapter 2", FontFactory.getFont(FontFactory.HELVETICA, 18, Font.BOLDITALIC, new Color(0, 0, 255)));
+                            Chapter chapter = new Chapter(title, cap);    
+                            //Chapter chapter = new Chapter(" " + lista[i].getPath().split("\\\\")[lista[i].getPath().split("\\\\").length - 2], 1);
                             //System.out.println("----------------CAPITOLO: " + cap + " - " +lista[i].getPath().split("\\\\")[lista[i].getPath().split("\\\\").length - 2] + "----------------------");
+                            
                             document.add(chapter);
                             isFirst = false;
                         }
