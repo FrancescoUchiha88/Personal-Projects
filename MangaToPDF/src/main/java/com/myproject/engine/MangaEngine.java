@@ -36,7 +36,6 @@ public class MangaEngine {
             PdfWriter writer = PdfWriter.getInstance(document, fos);
             writer.open();
             document.open();
-       //     Chapter chapter=new Chapter();
             scorriAlbero(f, document);
             document.addAuthor("Francesco Lucci");
             document.addTitle(namePDF);
@@ -60,7 +59,9 @@ public class MangaEngine {
                         document.add(image);
                     }
                 } else {
+                    Chapter chapter = new Chapter(lista[i].getPath().split("\\\\")[lista[i].getPath().split("\\\\").length-1],1);
                     System.out.println(lista[i].getPath());
+                    document.add(chapter);
                     scorriAlbero(lista[i], document);
                 }
             }
