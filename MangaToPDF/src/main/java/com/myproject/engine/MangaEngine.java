@@ -52,6 +52,7 @@ public class MangaEngine {
             for (int i = 0; i < lista.length; i++) {
                 if (!lista[i].isDirectory()) {
                     if ( ImageIO.read(lista[i]) != null) {
+                        System.out.println(lista[i].getPath());
                         Image image = Image.getInstance(lista[i].getPath());
                         image.scaleAbsolute(550f, 770f);
                         document.add(image);
