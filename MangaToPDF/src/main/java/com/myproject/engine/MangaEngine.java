@@ -6,6 +6,7 @@
 package com.myproject.engine;
 
 import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Chapter;
 import java.io.FileOutputStream;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -35,6 +36,7 @@ public class MangaEngine {
             PdfWriter writer = PdfWriter.getInstance(document, fos);
             writer.open();
             document.open();
+       //     Chapter chapter=new Chapter();
             scorriAlbero(f, document);
             document.addAuthor("Francesco Lucci");
             document.addTitle(namePDF);
