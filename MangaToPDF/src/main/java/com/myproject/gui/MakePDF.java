@@ -19,6 +19,8 @@ public class MakePDF extends javax.swing.JFrame {
      */
     public MakePDF() {
         initComponents();
+        MangaEngine.engine("C:\\Users\\Administrator\\Desktop\\Vol_71-80","C:\\Users\\Administrator\\Desktop","mypdf");
+
     }
 
     /**
@@ -212,7 +214,7 @@ public class MakePDF extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     MangaEngine.engine(TextFieldManga.getText(),TextFieldPDF.getText(),TextFieldPDFName.getText());
-        
+      
     }//GEN-LAST:event_ButtonGeneratePDFActionPerformed
 
     /**

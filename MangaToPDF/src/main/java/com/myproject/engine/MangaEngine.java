@@ -26,17 +26,17 @@ import javax.imageio.ImageIO;
  */
 public class MangaEngine {
 
-    public static void  engine(String pathManga,String pathPDF, String namePDF) {
+    public static void engine(String pathManga, String pathPDF, String namePDF) {
 
         try {
             File f = new File(pathManga);
             Document document = new Document(PageSize.A4, 50, 50, 50, 50);
-            String output =  pathPDF + "//" +  namePDF + ".pdf";
+            String output = pathPDF + "//" + namePDF + ".pdf";
             FileOutputStream fos = new FileOutputStream(output);
             PdfWriter writer = PdfWriter.getInstance(document, fos);
             writer.open();
             document.open();
-            scorriAlbero(f, document);
+            scorriAlbero(f, document, true, 0);
             document.addAuthor("Francesco Lucci");
             document.addTitle(namePDF);
             document.addCreationDate();
@@ -46,33 +46,32 @@ public class MangaEngine {
             e.printStackTrace();
         }
     }
-    
-    private static void scorriAlbero(File f, Document document) {
+
+    private static void scorriAlbero(File f, Document document, boolean isFirst, int cap) {
         File[] lista = f.listFiles();
         try {
             for (int i = 0; i < lista.length; i++) {
                 if (!lista[i].isDirectory()) {
-                    if ( ImageIO.read(lista[i]) != null) {
+                    if (ImageIO.read(lista[i]) != null) {
+                        if (isFirst) {
+                            cap=cap+1;
+                            Chapter chapter = new Chapter(lista[i].getPath().split("\\\\")[lista[i].getPath().split("\\\\").length - 2], 1);
+                            System.out.println("----------------CAPITOLO: " + cap + " - " +lista[i].getPath().split("\\\\")[lista[i].getPath().split("\\\\").length - 2] + "----------------------");
+                            document.add(chapter);
+                            isFirst = false;
+                        }
                         System.out.println(lista[i].getPath());
                         Image image = Image.getInstance(lista[i].getPath());
                         image.scaleAbsolute(550f, 770f);
                         document.add(image);
                     }
                 } else {
-                    Chapter chapter = new Chapter(lista[i].getPath().split("\\\\")[lista[i].getPath().split("\\\\").length-1],1);
                     System.out.println(lista[i].getPath());
-                    document.add(chapter);
-                    scorriAlbero(lista[i], document);
+                    scorriAlbero(lista[i], document, !isFirst, cap);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    
-    
-    
-    
-    
 }
