@@ -282,15 +282,14 @@ public class MakePDF extends javax.swing.JFrame {
                             document.add(chapter);
                             isFirst = false;
                         }
-                        LogArea.append(lista[i].getPath());
+                        System.out.println(lista[i].getPath());
                         
                         Image image = Image.getInstance(lista[i].getPath());
                         image.scaleAbsolute(550f, 770f);
                         document.add(image);
                     }
                 } else {
-                    LogArea.append("\n" + lista[i].getPath());
-                    LogArea.update(LogArea.getGraphics());
+                    System.out.println("\n" + lista[i].getPath());
                     scorriAlbero(lista[i], document, !isFirst);
                 }
             }
